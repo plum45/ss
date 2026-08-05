@@ -148,6 +148,7 @@
 .reference-table-wrap { overflow-x: auto; margin-top: 14px; border: 1px solid #e0e7f3; border-radius: 12px; }
 .reference-table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: .86rem; }
 .reference-table caption { padding: 12px 12px 8px; color: #38589c; font-size: .96rem; font-weight: 800; text-align: left; background: #f5f8ff; }
+.reference-table-note { display: block; margin-top: 6px; color: #697791; font-size: .84rem; font-weight: 500; line-height: 1.7; }
 .reference-table th,
 .reference-table td { padding: 9px 10px; border-top: 1px solid #e7ecf5; text-align: left; vertical-align: top; line-height: 1.65; }
 .reference-table th { color: #38589c; background: #eef3ff; font-weight: 800; }
@@ -348,6 +349,7 @@ body.dark .reference-table td:first-child { color: #c6d6ff; }
 body.dark .reference-table-wrap { border-color: #34425d; }
 body.dark .reference-table caption,
 body.dark .reference-table th { background: #29416c; }
+body.dark .reference-table-note { color: #afbdd3; }
 body.dark .reference-table th,
 body.dark .reference-table td { border-color: #34425d; color: #c2cde2; }
 body.dark .soft-highlight { border-color: #947a31; color: #fff0ad; background: #5b4a1d; }
