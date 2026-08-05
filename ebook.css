@@ -128,6 +128,9 @@
 .blueprint-table tr:last-child td { border-bottom: 0; }
 .blueprint-table td:nth-child(3),
 .blueprint-table td:nth-child(4) { white-space: nowrap; text-align: center; }
+.blueprint-table .blueprint-highlight { color: #244d9e; background: #f1f5ff; font-weight: 800; }
+.blueprint-table td:nth-child(3).blueprint-highlight,
+.blueprint-table td:nth-child(4).blueprint-highlight { background: #eaf0ff; }
 .blueprint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
 .blueprint-list { margin: 0; padding: 14px 16px 14px 30px; border-radius: 12px; background: #fff; color: #536177; font-size: .88rem; line-height: 1.75; }
 .blueprint-list b { display: block; margin-left: -16px; margin-bottom: 4px; color: #38589c; }
@@ -148,7 +151,7 @@
 .reference-table th,
 .reference-table td { padding: 9px 10px; border-top: 1px solid #e7ecf5; text-align: left; vertical-align: top; line-height: 1.65; }
 .reference-table th { color: #38589c; background: #eef3ff; font-weight: 800; }
-.reference-table td:first-child { color: #273f79; font-weight: 700; }
+.reference-table td:first-child { color: #273f79; background: #f5f8ff; font-weight: 700; }
 
 .ebook-keywords {
   margin: 0 0 28px;
@@ -183,7 +186,7 @@
   background: #fff;
 }
 
-.keyword-card dt { color: #263d76; font-weight: 800; line-height: 1.45; }
+.keyword-card dt { display: inline-block; padding: 2px 8px; border: 1px solid #d8e3ff; border-radius: 8px; color: #263d76; background: #eef3ff; font-weight: 800; line-height: 1.45; }
 .keyword-card dd { margin: 4px 0 0; color: #5e6a80; font-size: .88rem; line-height: 1.7; }
 
 .ebook-toc {
@@ -337,6 +340,7 @@ body.dark .keyword-heading b,
 body.dark .keyword-card dt { color: #c6d6ff; }
 body.dark .keyword-heading span,
 body.dark .keyword-card dd { color: #b9c6db; }
+body.dark .keyword-card dt { border-color: #3d578d; background: #29416c; }
 body.dark .ebook-toc a,
 body.dark .ebook-chapter { border-color: #34425d; background: #1b2942; }
 body.dark .ebook-toc a { color: #c6d6ff; }
