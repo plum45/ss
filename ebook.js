@@ -213,6 +213,16 @@
     });
   }
 
+  function expandAiExamples(value) {
+    const examples = {
+      'ChatGPT, Gemini และแชตบอตกลุ่ม LLM': 'ChatGPT, Gemini, Claude, Microsoft Copilot, Perplexity, NotebookLM และ DeepSeek',
+      'ChatGPT Images, Adobe Firefly': 'ChatGPT Images, Adobe Firefly, Canva AI/Magic Media, Midjourney, Ideogram และ Leonardo AI',
+      'Runway, Adobe Firefly': 'Runway, Adobe Firefly, Google Veo, Pika, Luma Dream Machine และ Kling AI',
+      'ChatGPT Voice/Dictation, ElevenLabs': 'ChatGPT Voice/Dictation, ElevenLabs, Descript, Adobe Podcast, Otter.ai และ Speechify'
+    };
+    return examples[value] || value;
+  }
+
   function makeBook(s) {
     const book = books[s.id];
     if (!book) return '';
@@ -226,7 +236,7 @@
         '</details>';
     }).join('');
     const blueprint = '<section class="ebook-blueprint" aria-label="Blueprint มาตรฐาน ' + s.id + '"><div class="blueprint-heading"><b>Blueprint และตัวเลขที่ควรจำ</b><span>ตามตารางน้ำหนักการวัดในหนังสือ</span></div><p class="blueprint-note">ภาพรวมข้อสอบทั้ง 100 ข้อแบ่งเป็น Level 1 = 10%, Level 2 = 20%, Level 3 = 50% และ Level 4 = 20% โดยมาตรฐานนี้มีน้ำหนักตามตารางด้านล่าง</p><div class="blueprint-table-wrap"><table class="blueprint-table"><thead><tr><th>ระดับ</th><th>ความสามารถ</th><th>จำนวนข้อ</th><th>สัดส่วนในมาตรฐาน</th></tr></thead><tbody>' + book.blueprint.levels.map(function (row) { return '<tr><td class="blueprint-highlight">' + esc(row[0]) + '</td><td>' + esc(row[1]) + '</td><td class="blueprint-highlight">' + esc(row[2]) + '</td><td class="blueprint-highlight">' + esc(row[3]) + '</td></tr>'; }).join('') + '</tbody></table></div><div class="blueprint-grid"><ul class="blueprint-list"><b>หลักการแกน</b>' + book.blueprint.principles.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('') + '</ul><ul class="blueprint-list"><b>ตัวเลข/ช่วงที่ต้องจำ</b>' + book.blueprint.numbers.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join('') + '</ul></div></section>';
-    const referenceTables = '<section class="ebook-reference" aria-label="ตารางสรุปมาตรฐาน ' + s.id + '"><h4>ตารางสรุปจำเร็ว</h4>' + book.tables.map(function (table) { return '<div class="reference-table-wrap"><table class="reference-table"><caption>' + esc(table.title) + (table.note ? '<small class="reference-table-note">' + esc(table.note) + '</small>' : '') + '</caption><thead><tr>' + table.columns.map(function (column) { return '<th>' + esc(column) + '</th>'; }).join('') + '</tr></thead><tbody>' + table.rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { const value = String(cell); const important = index > 0 && (/\d/.test(value) || /IOC|z-score|T-score|Level|PDCA|SAR|SWOT|Piaget|Freud|Kohlberg|Bruner/i.test(value)); return '<td>' + (important ? '<span class="soft-highlight">' + esc(value) + '</span>' : esc(value)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>'; }).join('') + '</section>';
+    const referenceTables = '<section class="ebook-reference" aria-label="ตารางสรุปมาตรฐาน ' + s.id + '"><h4>ตารางสรุปจำเร็ว</h4>' + book.tables.map(function (table) { return '<div class="reference-table-wrap"><table class="reference-table"><caption>' + esc(table.title) + (table.note ? '<small class="reference-table-note">' + esc(table.note) + '</small>' : '') + '</caption><thead><tr>' + table.columns.map(function (column) { return '<th>' + esc(column) + '</th>'; }).join('') + '</tr></thead><tbody>' + table.rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { const value = expandAiExamples(String(cell)); const important = index > 0 && (/\d/.test(value) || /IOC|z-score|T-score|Level|PDCA|SAR|SWOT|Piaget|Freud|Kohlberg|Bruner/i.test(value)); return '<td>' + (important ? '<span class="soft-highlight">' + esc(value) + '</span>' : esc(value)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>'; }).join('') + '</section>';
     const keywords = '<section class="ebook-keywords" aria-label="คำสำคัญของมาตรฐาน ' + s.id + '"><div class="keyword-heading"><b>คีย์เวิร์ดที่ควรรู้</b><span>อ่านความหมายก่อนลงรายละเอียด</span></div><dl class="keyword-grid">' + book.keywords.map(function (item) { return '<div class="keyword-card"><dt>' + esc(item[0]) + '</dt><dd>' + esc(item[1]) + '</dd></div>'; }).join('') + '</dl></section>';
     const toc = book.chapters.map(function (chapter, index) {
       return '<a href="#' + slug + '-chapter-' + (index + 1) + '">บทที่ ' + (index + 1) + ' · ' + esc(chapter[0]) + '</a>';
