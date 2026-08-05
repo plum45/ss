@@ -101,6 +101,38 @@
 
 .ebook-goal b { display: block; margin-bottom: 4px; color: #244d9e; }
 
+.ebook-blueprint {
+  margin: 0 0 28px;
+  padding: 20px;
+  border: 1px solid #dce5f5;
+  border-radius: 18px;
+  background: #f8faff;
+}
+
+.blueprint-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.blueprint-heading b { color: #244d9e; font-size: 1.05rem; }
+.blueprint-heading span { color: #71809a; font-size: .82rem; }
+.blueprint-note { margin: 0 0 14px; color: #5e6a80; font-size: .88rem; line-height: 1.7; }
+.blueprint-table-wrap { overflow-x: auto; border: 1px solid #e0e7f3; border-radius: 12px; background: #fff; }
+.blueprint-table { width: 100%; min-width: 610px; border-collapse: collapse; font-size: .84rem; }
+.blueprint-table th,
+.blueprint-table td { padding: 9px 10px; border-bottom: 1px solid #e7ecf5; text-align: left; vertical-align: top; }
+.blueprint-table th { color: #38589c; background: #eef3ff; font-weight: 800; }
+.blueprint-table tr:last-child td { border-bottom: 0; }
+.blueprint-table td:nth-child(3),
+.blueprint-table td:nth-child(4) { white-space: nowrap; text-align: center; }
+.blueprint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.blueprint-list { margin: 0; padding: 14px 16px 14px 30px; border-radius: 12px; background: #fff; color: #536177; font-size: .88rem; line-height: 1.75; }
+.blueprint-list b { display: block; margin-left: -16px; margin-bottom: 4px; color: #38589c; }
+.blueprint-list li { margin: 3px 0; }
+
 .ebook-keywords {
   margin: 0 0 28px;
   padding: 20px;
@@ -247,6 +279,9 @@
   .ebook-toc,
   .ebook-points,
   .keyword-grid { grid-template-columns: 1fr; }
+  .blueprint-grid { grid-template-columns: 1fr; }
+  .blueprint-heading { display: block; }
+  .blueprint-heading span { display: block; margin-top: 3px; }
   .keyword-heading { display: block; }
   .keyword-heading span { display: block; margin-top: 3px; }
   .ebook-cover { padding: 30px 22px 42px; }
@@ -259,6 +294,17 @@ body.dark .ebook-reader { border-color: #34425d; background: #172238; }
 body.dark .ebook-body { background: #172238; }
 body.dark .ebook-goal { background: #223452; color: #d6e1fa; }
 body.dark .ebook-goal b { color: #b9ceff; }
+body.dark .ebook-blueprint { border-color: #34425d; background: #1b2942; }
+body.dark .blueprint-heading b,
+body.dark .blueprint-table th,
+body.dark .blueprint-list b { color: #c6d6ff; }
+body.dark .blueprint-heading span,
+body.dark .blueprint-note,
+body.dark .blueprint-list { color: #b9c6db; }
+body.dark .blueprint-table-wrap,
+body.dark .blueprint-list { background: #223452; }
+body.dark .blueprint-table th { background: #29416c; }
+body.dark .blueprint-table td { border-color: #34425d; color: #c2cde2; }
 body.dark .ebook-keywords { border-color: #34425d; background: #1b2942; }
 body.dark .keyword-heading b,
 body.dark .keyword-card dt { color: #c6d6ff; }
