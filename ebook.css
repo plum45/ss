@@ -152,6 +152,7 @@
 .reference-table td { padding: 9px 10px; border-top: 1px solid #e7ecf5; text-align: left; vertical-align: top; line-height: 1.65; }
 .reference-table th { color: #38589c; background: #eef3ff; font-weight: 800; }
 .reference-table td:first-child { color: #273f79; background: #f5f8ff; font-weight: 700; }
+.soft-highlight { display: inline-block; padding: 1px 7px; border: 1px solid #efd56a; border-radius: 6px; color: #674b08; background: #fff1b8; font-weight: 800; line-height: 1.45; }
 
 .ebook-keywords {
   margin: 0 0 28px;
@@ -335,6 +336,7 @@ body.dark .reference-table caption,
 body.dark .reference-table th { background: #29416c; }
 body.dark .reference-table th,
 body.dark .reference-table td { border-color: #34425d; color: #c2cde2; }
+body.dark .soft-highlight { border-color: #947a31; color: #fff0ad; background: #5b4a1d; }
 body.dark .ebook-keywords { border-color: #34425d; background: #1b2942; }
 body.dark .keyword-heading b,
 body.dark .keyword-card dt { color: #c6d6ff; }
