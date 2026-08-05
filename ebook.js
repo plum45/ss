@@ -282,7 +282,10 @@
     return '<section class="ebook-reference ebook-exam-review" aria-label="สรุปจากแนวข้อสอบ"><h4>มาตรฐานที่ ' + s.id + ' · ' + esc(review.title) + '</h4><p class="reference-table-note"><b>หมวดนี้อยู่ในมาตรฐานที่ ' + s.id + '</b> · ' + esc(review.note) + '</p><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>หัวข้อ</th><th>แก่นที่ต้องเข้าใจ</th><th>จุดที่ข้อสอบชอบหลอก/ต้องตอบให้ได้</th></tr></thead><tbody>' + review.rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { return '<td>' + (index === 0 ? '<span class="soft-highlight">' + esc(cell) + '</span>' : esc(cell)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p class="ebook-source">สรุปจากหัวข้อและเหตุผลประกอบใน <a href="https://license-zeta.vercel.app/" target="_blank" rel="noreferrer">คลังข้อสอบใบประกอบวิชาชีพครูออนไลน์</a> ไม่ใช่การถอดข้อสอบหรือการรับรองคำตอบแทนแหล่งกฎหมายต้นฉบับ</p></section>';
   }
 
+  let currentAiExtraRows = [];
+
   function makeAiExtras(s) {
+    if (s.id !== 1) return '';
     if (s.id !== 1) return '';
     const rows = [
       ['🔎 Research / Search AI', 'ค้นคว้า สรุป เปรียบเทียบ และจัดกลุ่มข้อมูลจากแหล่งอ้างอิง', 'NotebookLM, Perplexity, Elicit, Consensus', 'สรุปบทความ เตรียมบทเรียน ตรวจแหล่งข้อมูล และทำ literature review เบื้องต้น', 'ตรวจลิงก์และต้นฉบับ อย่าเชื่อคำตอบที่ไม่มี citation'],
@@ -294,12 +297,19 @@
       ['⚙️ Automation / AI Agent', 'เชื่อมเครื่องมือและให้ AI ช่วยทำงานหลายขั้นตอนตามกติกาหรือ Trigger', 'Zapier AI, Make, Microsoft Copilot Studio, n8n', 'จัดอีเมล สร้างรายงาน แจ้งเตือน และส่งข้อมูลระหว่างระบบ', 'กำหนดสิทธิ์การเข้าถึง ตรวจการส่งข้อมูล และมีจุดให้คนอนุมัติ'],
       ['🎓 AI Tutor / Education AI', 'อธิบายแบบปรับระดับ ตั้งคำถาม สร้างแบบฝึก และให้ feedback รายบุคคล', 'Khanmigo, NotebookLM, ChatGPT Study Mode, Gemini', 'ติวซ่อมเสริม สร้างข้อสอบจำลอง ฝึกภาษา และทำ study guide', 'AI ไม่แทนครู ต้องดูวัย ความปลอดภัย อคติ และความถูกต้องของเนื้อหา']
     ];
+    currentAiExtraRows = rows;
     return '<section class="ebook-reference ebook-ai-extras" aria-label="AI ประเภทอื่นที่ควรรู้"><h4>AI ประเภทอื่นนอกจาก Text / Image / Video / Speech</h4><p class="reference-table-note"><b>เกี่ยวกับงานที่ AI ช่วยทำได้</b> ไม่ได้จำกัดแค่การสร้างสื่อ แต่รวมถึงการค้นคว้า วิเคราะห์ข้อมูล เขียนโค้ด ทำเอกสาร แปลภาษา และทำงานอัตโนมัติ</p><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>ประเภทงาน</th><th>เกี่ยวกับอะไร</th><th>ตัวอย่างเครื่องมือ</th><th>ตัวอย่างใช้จริง</th><th>จุดตรวจสอบ</th></tr></thead><tbody>' + rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { return '<td>' + (index === 0 ? '<span class="soft-highlight">' + esc(cell) + '</span>' : esc(cell)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div></section>';
   }
 
   function makeBook(s) {
     const book = books[s.id];
     if (!book) return '';
+    makeAiExtras(s);
+    const aiTable = book.tables.find(function (table) { return table.title === 'AI ช่วยงาน: Text / Image / Video / Speech'; });
+    if (aiTable && currentAiExtraRows.length && !aiTable.examExtrasAdded) {
+      aiTable.rows = aiTable.rows.concat(currentAiExtraRows);
+      aiTable.examExtrasAdded = true;
+    }
     const slug = 'ebook-' + s.id;
     const chapters = book.chapters.map(function (chapter, index) {
       const id = slug + '-chapter-' + (index + 1);
@@ -338,7 +348,6 @@
         const ebookBody = content.querySelector('.ebook-reader .ebook-body');
         if (ebookBody) {
           ebookBody.insertAdjacentHTML('afterbegin', makeExamReview(standard));
-          ebookBody.insertAdjacentHTML('afterbegin', makeAiExtras(standard));
         }
       }
     });
