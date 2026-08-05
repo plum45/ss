@@ -67,7 +67,10 @@
         ['Adobe Firefly: Image to Video', 'https://www.adobe.com/products/firefly/features/image-to-video.html'],
         ['Runway: AI Video Generator', 'https://runwayml.com/product/ai-video-generator'],
         ['ElevenLabs: Generative AI for Audio', 'https://help.elevenlabs.io/hc/en-us/articles/27583713738257-What-is-ElevenLabs'],
-        ['Google Gemini: Overview', 'https://gemini.google/overview-gemini-app.pdf']
+        ['Google Gemini: Overview', 'https://gemini.google/overview-gemini-app.pdf'],
+        ['Google NotebookLM: Research Assistant', 'https://support.google.com/notebooklm/answer/16164461?hl=en'],
+        ['GitHub Copilot: AI Pair Programmer', 'https://github.com/features/copilot'],
+        ['Adobe Acrobat AI Assistant: PDF Insights', 'https://experienceleague.adobe.com/en/docs/document-cloud-learn/acrobat-learning/get-started/ai/ai-assistant?lang=en']
       ],
       exam: 'เมื่อเจอโจทย์สถานการณ์ ให้ถาม 4 คำถาม: เป้าหมายผู้เรียนคืออะไร ข้อมูลใดจำเป็น หลักการใดเกี่ยวข้อง และทางเลือกใดสมดุล-ทำได้จริง-ตรวจสอบได้'
     },
@@ -279,6 +282,21 @@
     return '<section class="ebook-reference ebook-exam-review" aria-label="สรุปจากแนวข้อสอบ"><h4>มาตรฐานที่ ' + s.id + ' · ' + esc(review.title) + '</h4><p class="reference-table-note"><b>หมวดนี้อยู่ในมาตรฐานที่ ' + s.id + '</b> · ' + esc(review.note) + '</p><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>หัวข้อ</th><th>แก่นที่ต้องเข้าใจ</th><th>จุดที่ข้อสอบชอบหลอก/ต้องตอบให้ได้</th></tr></thead><tbody>' + review.rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { return '<td>' + (index === 0 ? '<span class="soft-highlight">' + esc(cell) + '</span>' : esc(cell)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p class="ebook-source">สรุปจากหัวข้อและเหตุผลประกอบใน <a href="https://license-zeta.vercel.app/" target="_blank" rel="noreferrer">คลังข้อสอบใบประกอบวิชาชีพครูออนไลน์</a> ไม่ใช่การถอดข้อสอบหรือการรับรองคำตอบแทนแหล่งกฎหมายต้นฉบับ</p></section>';
   }
 
+  function makeAiExtras(s) {
+    if (s.id !== 1) return '';
+    const rows = [
+      ['🔎 Research / Search AI', 'ค้นคว้า สรุป เปรียบเทียบ และจัดกลุ่มข้อมูลจากแหล่งอ้างอิง', 'NotebookLM, Perplexity, Elicit, Consensus', 'สรุปบทความ เตรียมบทเรียน ตรวจแหล่งข้อมูล และทำ literature review เบื้องต้น', 'ตรวจลิงก์และต้นฉบับ อย่าเชื่อคำตอบที่ไม่มี citation'],
+      ['📊 Data / Spreadsheet AI', 'วิเคราะห์ตาราง ทำความสะอาดข้อมูล สร้างกราฟ และช่วยหาแนวโน้ม', 'ChatGPT Data Analysis, Gemini, Microsoft Copilot, Julius AI', 'วิเคราะห์คะแนน สรุปผลแบบสอบถาม ทำกราฟ และวางแผนจากข้อมูล', 'ตรวจสูตร หน่วย ตัวอย่างข้อมูล และข้อมูลส่วนบุคคล'],
+      ['💻 Coding / Software AI', 'ช่วยเขียน อธิบาย แก้ไข และทดสอบโค้ดหรือสร้างต้นแบบโปรแกรม', 'GitHub Copilot, Cursor, Replit Agent, Claude', 'ทำเว็บต้นแบบ สร้างแบบฝึกเขียนโปรแกรม และช่วยแก้บั๊ก', 'อ่านโค้ดก่อนใช้ ทดสอบความปลอดภัย และไม่วางรหัสผ่าน/API key ใน Prompt'],
+      ['📽️ Presentation / Slide AI', 'เปลี่ยนหัวข้อหรือเอกสารให้เป็นโครงร่างสไลด์ ดีไซน์ และภาพประกอบ', 'Gamma, Canva, Microsoft Copilot, Beautiful.ai', 'ทำสไลด์บทเรียน โครงงาน รายงาน และสรุปสำหรับนำเสนอ', 'ตรวจลำดับเหตุผล ตัวเลข แหล่งภาพ และอย่าให้ดีไซน์กลบสาระ'],
+      ['📄 Document / PDF / OCR AI', 'อ่านเอกสารยาว ดึงข้อความจากภาพ/สแกน สรุป และถามตอบจากไฟล์', 'Adobe Acrobat AI Assistant, ChatGPT, Gemini, NotebookLM', 'สรุปหนังสือ/ระเบียบ ค้นมาตรา ทำ FAQ และแปลงเอกสารเป็นโน้ต', 'ตรวจหน้าต้นฉบับ ตาราง และข้อความ OCR ที่อาจอ่านผิด'],
+      ['🌍 Translation / Localization AI', 'แปลภาษา ปรับสำนวน และทำเนื้อหาให้เหมาะกับผู้รับสารหรือบริบทท้องถิ่น', 'DeepL, Google Translate, ChatGPT, Gemini', 'แปลบทความ ใบงาน คำบรรยาย และสื่อสองภาษา', 'ตรวจชื่อเฉพาะ บริบท วัฒนธรรม และความหมายทางกฎหมาย'],
+      ['⚙️ Automation / AI Agent', 'เชื่อมเครื่องมือและให้ AI ช่วยทำงานหลายขั้นตอนตามกติกาหรือ Trigger', 'Zapier AI, Make, Microsoft Copilot Studio, n8n', 'จัดอีเมล สร้างรายงาน แจ้งเตือน และส่งข้อมูลระหว่างระบบ', 'กำหนดสิทธิ์การเข้าถึง ตรวจการส่งข้อมูล และมีจุดให้คนอนุมัติ'],
+      ['🎓 AI Tutor / Education AI', 'อธิบายแบบปรับระดับ ตั้งคำถาม สร้างแบบฝึก และให้ feedback รายบุคคล', 'Khanmigo, NotebookLM, ChatGPT Study Mode, Gemini', 'ติวซ่อมเสริม สร้างข้อสอบจำลอง ฝึกภาษา และทำ study guide', 'AI ไม่แทนครู ต้องดูวัย ความปลอดภัย อคติ และความถูกต้องของเนื้อหา']
+    ];
+    return '<section class="ebook-reference ebook-ai-extras" aria-label="AI ประเภทอื่นที่ควรรู้"><h4>AI ประเภทอื่นนอกจาก Text / Image / Video / Speech</h4><p class="reference-table-note"><b>เกี่ยวกับงานที่ AI ช่วยทำได้</b> ไม่ได้จำกัดแค่การสร้างสื่อ แต่รวมถึงการค้นคว้า วิเคราะห์ข้อมูล เขียนโค้ด ทำเอกสาร แปลภาษา และทำงานอัตโนมัติ</p><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>ประเภทงาน</th><th>เกี่ยวกับอะไร</th><th>ตัวอย่างเครื่องมือ</th><th>ตัวอย่างใช้จริง</th><th>จุดตรวจสอบ</th></tr></thead><tbody>' + rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { return '<td>' + (index === 0 ? '<span class="soft-highlight">' + esc(cell) + '</span>' : esc(cell)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div></section>';
+  }
+
   function makeBook(s) {
     const book = books[s.id];
     if (!book) return '';
@@ -318,7 +336,10 @@
       if (standard && content) {
         content.insertAdjacentHTML('afterbegin', makeBook(standard));
         const ebookBody = content.querySelector('.ebook-reader .ebook-body');
-        if (ebookBody) ebookBody.insertAdjacentHTML('afterbegin', makeExamReview(standard));
+        if (ebookBody) {
+          ebookBody.insertAdjacentHTML('afterbegin', makeExamReview(standard));
+          ebookBody.insertAdjacentHTML('afterbegin', makeAiExtras(standard));
+        }
       }
     });
   }
