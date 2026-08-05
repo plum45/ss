@@ -12,6 +12,7 @@
   <style>
     .view-hidden{display:none!important}.back{border:1px solid #cbd5e8;background:#fff;color:#12254c;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}.detail-title{display:flex;align-items:center;gap:13px;margin-bottom:18px}.detail-title h2{margin:0}@media(max-width:560px){.detail-title{align-items:flex-start;flex-direction:column}}
   </style>
+  <link rel="stylesheet" href="ebook.css">
 </head>
 <body>
   <header class="hero"><div class="wrap"><span class="eyebrow">✦ คู่มืออ่านสอบจากหนังสือ “วิชาครู 5 มาตรฐาน”</span><h1>อ่านเป็นระบบ<br>จำได้ และเอาไปใช้ในโจทย์ได้</h1><p>สรุปครบ 5 มาตรฐานความรู้ พร้อมคีย์เวิร์ด จุดออกสอบบ่อย ข้อสอบฝึกคิด และแผนอ่านที่ติ๊กความคืบหน้าได้</p><div class="metrics"><div class="metric"><b>100 ข้อ</b><span>น้ำหนักรวมตามตารางในหนังสือ</span></div><div class="metric"><b>50%</b><span>เน้นวิเคราะห์และประยุกต์ใช้</span></div><div class="metric"><b>5 มาตรฐาน</b><span>อ่านทีละส่วนได้</span></div></div></div></header>
@@ -61,4 +62,5 @@ function focusMode(){let f=document.getElementById('focus').value;document.query
 function toggleDark(){let d=document.body.classList.toggle('dark');document.documentElement.style.setProperty('--paper',d?'#111827':'#f6f8fc');document.documentElement.style.setProperty('--ink',d?'#e9efff':'#19233b');document.documentElement.style.setProperty('--muted',d?'#bac4db':'#69738a');document.documentElement.style.setProperty('--line',d?'#29354c':'#e5e9f2');document.querySelectorAll('.card,.standard,.order').forEach(x=>x.style.background=d?'#172238':'#fff')}
 render();let pageFile=location.pathname.split('/').pop();if(pageFile.indexOf('standard-')===0){selectedId=+pageFile.split('-')[1][0];applyDetailView(selectedId)}else{document.getElementById('standards').classList.add('view-hidden')}
   </script>
+  <script src="ebook.js"></script>
 </body></html>

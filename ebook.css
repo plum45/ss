@@ -1,0 +1,273 @@
+/* E-book reader layer: keeps the original study cards, but adds a readable book flow. */
+.ebook-reader {
+  margin: 0 0 28px;
+  border: 1px solid #dfe6f2;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(36, 55, 95, .10);
+}
+
+.ebook-cover {
+  position: relative;
+  padding: clamp(28px, 5vw, 58px);
+  color: #f7f9ff;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(255,255,255,.22), transparent 25%),
+    linear-gradient(135deg, #172c62 0%, #3156a6 56%, #6d86cb 100%);
+}
+
+.ebook-cover::after {
+  content: "";
+  position: absolute;
+  right: 7%;
+  bottom: -36px;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(255,255,255,.05), 0 0 0 48px rgba(255,255,255,.035);
+}
+
+.ebook-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 12px;
+  color: #c9d8ff;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.ebook-cover h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.65rem, 4vw, 2.7rem);
+  line-height: 1.14;
+}
+
+.ebook-subtitle {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: #e4ebff;
+  line-height: 1.8;
+}
+
+.ebook-facts {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 780px;
+  margin-top: 28px;
+}
+
+.ebook-fact {
+  padding: 13px 15px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 14px;
+  background: rgba(9, 22, 57, .22);
+}
+
+.ebook-fact b,
+.ebook-fact span {
+  display: block;
+}
+
+.ebook-fact b { color: #fff; font-size: 1.05rem; }
+.ebook-fact span { margin-top: 4px; color: #cbd8fb; font-size: .78rem; }
+
+.ebook-body {
+  padding: clamp(20px, 4vw, 42px);
+  background: linear-gradient(180deg, #fbfcff 0%, #fff 100%);
+}
+
+.ebook-goal {
+  margin: 0 0 26px;
+  padding: 18px 20px;
+  border-left: 4px solid #4e72c2;
+  border-radius: 0 15px 15px 0;
+  background: #edf3ff;
+  color: #27385d;
+  line-height: 1.75;
+}
+
+.ebook-goal b { display: block; margin-bottom: 4px; color: #244d9e; }
+
+.ebook-keywords {
+  margin: 0 0 28px;
+  padding: 20px;
+  border: 1px solid #dce5f5;
+  border-radius: 18px;
+  background: #f4f7fd;
+}
+
+.keyword-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.keyword-heading b { color: #244d9e; font-size: 1.05rem; }
+.keyword-heading span { color: #71809a; font-size: .82rem; }
+
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.keyword-card {
+  margin: 0;
+  padding: 13px 14px;
+  border: 1px solid #e0e7f3;
+  border-radius: 13px;
+  background: #fff;
+}
+
+.keyword-card dt { color: #263d76; font-weight: 800; line-height: 1.45; }
+.keyword-card dd { margin: 4px 0 0; color: #5e6a80; font-size: .88rem; line-height: 1.7; }
+
+.ebook-toc {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.ebook-toc a {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid #e1e7f3;
+  border-radius: 12px;
+  color: #2d4f9b;
+  background: #fff;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.ebook-toc a:hover { border-color: #8ba6e2; background: #f5f8ff; }
+
+.ebook-chapter {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 22px 22px 20px;
+  border: 1px solid #e4e9f2;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.ebook-chapter[open] { box-shadow: 0 10px 28px rgba(50, 73, 121, .07); }
+
+.ebook-chapter summary {
+  cursor: pointer;
+  list-style: none;
+  padding-right: 24px;
+}
+
+.ebook-chapter summary::-webkit-details-marker { display: none; }
+.ebook-chapter summary::after {
+  content: "+";
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  color: #5574b7;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.ebook-chapter[open] summary::after { content: "−"; }
+
+.chapter-no {
+  display: block;
+  margin-bottom: 6px;
+  color: #6b85c4;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.ebook-chapter h4 { margin: 0; color: #1e2f55; font-size: 1.12rem; }
+.ebook-chapter p { margin: 13px 0 0; color: #59657b; line-height: 1.85; }
+
+.ebook-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ebook-points li {
+  position: relative;
+  padding-left: 19px;
+  color: #3c4960;
+  font-size: .92rem;
+  line-height: 1.7;
+}
+
+.ebook-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #43856d;
+  font-weight: 800;
+}
+
+.ebook-exam {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #fff7e6;
+  color: #654b1e;
+}
+
+.ebook-exam b { display: block; margin-bottom: 7px; color: #8b641c; }
+.ebook-exam p { margin: 0; color: #654b1e; }
+
+.ebook-source {
+  margin: 22px 0 0;
+  color: #7d8799;
+  font-size: .78rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 680px) {
+  .ebook-facts,
+  .ebook-toc,
+  .ebook-points,
+  .keyword-grid { grid-template-columns: 1fr; }
+  .keyword-heading { display: block; }
+  .keyword-heading span { display: block; margin-top: 3px; }
+  .ebook-cover { padding: 30px 22px 42px; }
+  .ebook-body { padding: 18px 14px 24px; }
+  .ebook-chapter { padding: 18px 16px; }
+  .ebook-chapter summary::after { top: 17px; right: 16px; }
+}
+
+body.dark .ebook-reader { border-color: #34425d; background: #172238; }
+body.dark .ebook-body { background: #172238; }
+body.dark .ebook-goal { background: #223452; color: #d6e1fa; }
+body.dark .ebook-goal b { color: #b9ceff; }
+body.dark .ebook-keywords { border-color: #34425d; background: #1b2942; }
+body.dark .keyword-heading b,
+body.dark .keyword-card dt { color: #c6d6ff; }
+body.dark .keyword-heading span,
+body.dark .keyword-card dd { color: #b9c6db; }
+body.dark .ebook-toc a,
+body.dark .ebook-chapter { border-color: #34425d; background: #1b2942; }
+body.dark .ebook-toc a { color: #c6d6ff; }
+body.dark .ebook-chapter h4 { color: #e6edff; }
+body.dark .ebook-chapter p,
+body.dark .ebook-points li { color: #c2cde2; }
+body.dark .ebook-source { color: #aab7ce; }
