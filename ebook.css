@@ -295,6 +295,20 @@
   line-height: 1.7;
 }
 
+.ebook-ai-sources {
+  margin: 24px 0 0;
+  padding: 18px 20px;
+  border: 1px solid #dce5f5;
+  border-radius: 16px;
+  background: #f7faff;
+}
+
+.ebook-ai-sources h4 { margin: 0 0 7px; color: #274c91; }
+.ebook-ai-sources p { margin: 0 0 10px; color: #68758b; font-size: .86rem; line-height: 1.7; }
+.ebook-ai-sources ul { margin: 0; padding-left: 20px; }
+.ebook-ai-sources li { margin: 5px 0; color: #52627e; font-size: .88rem; }
+.ebook-ai-sources a { color: #315fae; }
+
 @media (max-width: 680px) {
   .ebook-facts,
   .ebook-toc,
@@ -350,3 +364,8 @@ body.dark .ebook-chapter h4 { color: #e6edff; }
 body.dark .ebook-chapter p,
 body.dark .ebook-points li { color: #c2cde2; }
 body.dark .ebook-source { color: #aab7ce; }
+body.dark .ebook-ai-sources { border-color: #34425d; background: #1b2942; }
+body.dark .ebook-ai-sources h4 { color: #d8e4ff; }
+body.dark .ebook-ai-sources p,
+body.dark .ebook-ai-sources li { color: #b9c6db; }
+body.dark .ebook-ai-sources a { color: #a9c5ff; }
