@@ -260,6 +260,16 @@
     }
   };
 
+  // The external question bank groups content by exam category, while the book numbers standards by the supplied PDF.
+  // Keep the review content, but map each category to the standard it belongs to in this site.
+  const examReviewByStandard = {
+    1: examReview[5],
+    2: examReview[2],
+    3: examReview[1],
+    4: examReview[3],
+    5: examReview[4]
+  };
+
   function esc(value) {
     return String(value).replace(/[&<>"']/g, function (ch) {
       return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
@@ -277,7 +287,7 @@
   }
 
   function makeExamReview(s) {
-    const review = examReview[s.id];
+    const review = examReviewByStandard[s.id];
     if (!review) return '';
     return '<section class="ebook-reference ebook-exam-review" aria-label="สรุปจากแนวข้อสอบ"><h4>มาตรฐานที่ ' + s.id + ' · ' + esc(review.title) + '</h4><p class="reference-table-note"><b>หมวดนี้อยู่ในมาตรฐานที่ ' + s.id + '</b> · ' + esc(review.note) + '</p><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>หัวข้อ</th><th>แก่นที่ต้องเข้าใจ</th><th>จุดที่ข้อสอบชอบหลอก/ต้องตอบให้ได้</th></tr></thead><tbody>' + review.rows.map(function (row) { return '<tr>' + row.map(function (cell, index) { return '<td>' + (index === 0 ? '<span class="soft-highlight">' + esc(cell) + '</span>' : esc(cell)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p class="ebook-source">สรุปจากหัวข้อและเหตุผลประกอบใน <a href="https://license-zeta.vercel.app/" target="_blank" rel="noreferrer">คลังข้อสอบใบประกอบวิชาชีพครูออนไลน์</a> ไม่ใช่การถอดข้อสอบหรือการรับรองคำตอบแทนแหล่งกฎหมายต้นฉบับ</p></section>';
   }
